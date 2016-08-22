@@ -2,23 +2,26 @@ app.config(function($stateProvider) {
     $stateProvider.state('entry', {
         url: '/entry',
         templateUrl: 'js/entry/entry.html',
-        controller: 'EntryController',
-        data: {
-            bodyClass: 'bg4'
-        }
+        controller: 'EntryController'
     });
 });
 
-app.controller('EntryController', function($scope) {
-    $scope.tinymceModel = 'How are you feeling today?';
+app.controller('EntryController', function($scope, $log) {
+  $scope.tinymceModel = '\'sup?';
 
-    $scope.getContent = function() {
-        console.log('Editor content:', $scope.tinymceModel);
-    };
+  var reg = /[^.!?]*[.!?]/gi;
 
-    $scope.setContent = function() {
-        $scope.tinymceModel = 'Time: ' + (new Date());
-    };
+  $scope.validate = function (){
+    return $scope.tinymceModel.length > 17 && $scope.tinymceModel.match(reg)
+  }
+
+  $scope.getContent = function() {
+    console.log('Editor content:', $scope.tinymceModel);
+  };
+
+  $scope.setContent = function() {
+    $scope.tinymceModel = 'Time: ' + (new Date());
+  };
 
     $scope.tinymceOptions = {
         selector: 'div.tinymce',
@@ -34,7 +37,7 @@ app.controller('EntryController', function($scope) {
 app.factory('EntryFactory', function ($http) {
   let entryObj = {};
   entryObj.analyzeEntry = function (entry) {
-    
+
   }
   return entryObj;
 });

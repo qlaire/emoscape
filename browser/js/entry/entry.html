@@ -1,10 +1,19 @@
 <navbar></navbar>
 <section id="entry">
-    <div class="background">
-        <h2>JOURNAL</h2>
-        <div class="tinymce tinymcestyle" ui-tinymce="tinymceOptions" ng-model="tinymceModel">
+    <div class="container">
+        <div class="col-md-12">
+            <h2>JOURNAL</h2>
+            <form name="newEntry" ng-submit="newEntry.$valid && postEntry()" novalidate>
+                <label for="title">Title:</label>
+                <input ng-model="entry.title" type="text">
+                <div name="body" class="tinymce tinymcestyle" ng-model="tinymceModel" ui-tinymce="tinymceOptions">
+                </div>
+                <div>
+                {{tinymceModel.length}}
+                </div>
+                <button id="post" ng-disabled="!validate() || newEntry.body.$pristine" class="btn btn-default">Post</button>
+                <br>
+            </form>
         </div>
-        <button id="post" class="btn btn-default">Post</button>
-        <br>
     </div>
 </section>
