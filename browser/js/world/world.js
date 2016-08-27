@@ -5,8 +5,7 @@ app.config(function ($stateProvider) {
 		controller: 'WorldCtrl'
 	});
 })
-
-app.controller('WorldCtrl', function ($scope, DataFactory,$stateParams) {
+app.controller('WorldCtrl', function ($scope, DataFactory,$stateParams, PicsFactory) {
 	if($stateParams.mode==='demo'){
 		$scope.worldData=DataFactory.getDemoData();
 	}
@@ -14,11 +13,16 @@ app.controller('WorldCtrl', function ($scope, DataFactory,$stateParams) {
 		DataFactory.getWorldData()
 		.then(function(returnedData){
 			$scope.worldData=returnedData;
-		})		
+		})
 	}
+
 	var worldWindow=worldFrame.contentWindow;
     worldFrame.onload = function(){
-        worldWindow.postMessage($scope.worldData,'/')    
+        worldWindow.postMessage($scope.worldData,'/')
     };
-});
 
+  worldWindow.addEventListener('screenshot', function(event){
+    PicsFactory.postPic(event.detail);
+  }, false);
+
+});

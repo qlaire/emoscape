@@ -121,6 +121,14 @@ function initPointerLockControls(){
 			case 68: // d
 				playerMovements.moveRight = false;
 				break;
+      case 88: // x
+        renderer.render(scene, camera);
+
+       var evt = new CustomEvent('screenshot', {
+        detail: {imgUrl: renderer.domElement.toDataURL()}
+       })
+        window.dispatchEvent(evt);
+        break;
 		}
 	};
 
