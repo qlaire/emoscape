@@ -5,25 +5,6 @@ app.directive('footer', function($rootScope, AuthService, AUTH_EVENTS, $state) {
         templateUrl: 'js/common/directives/footer/footer.html',
         link: function(scope) {
 
-            scope.loggedOutitems = [{
-                label: 'LOGIN',
-                state: 'login'
-            }, {
-                label: 'SIGNUP',
-                state: 'signup'
-            }];
-
-            scope.loggedInItems = [{
-                label: 'NEW ENTRY',
-                state: 'entry'
-            }, {
-                label: 'YOUR JOURNAL',
-                state: 'entries'
-            }, {
-                label: 'YOUR WORLD',
-                state: 'world'
-            }];
-
             scope.user = null;
 
             scope.isLoggedIn = function() {
